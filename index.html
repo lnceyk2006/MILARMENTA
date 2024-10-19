@@ -3,92 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Infinite Image Slider</title>
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-image: url('images/ccs.jpg'); 
-            background-size: cover;
-            background-position: center;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
-            color: #333;
-            position: relative;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #f0f0f0; /* Background color */
         }
-    
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7); 
-            z-index: 1;
-        }
-        .header, .profile-section, .slider {
-            position: relative;
-            z-index: 2;
-        }
-        .header {
-            background-color: transparent; 
-            color: white;
-            padding: 20px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        .profile-section {
-            background-color: transparent;
-            padding: 40px;
-            display: inline-block;
-        }
-        .profile-section img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        .profile-section img:hover {
-            transform: scale(1.2);
-        }
-        .profile-section h2 {
-            margin-top: 15px;
-            font-size: 2rem;
-            color: #fff; 
-        }
-        .profile-section p {
-            font-size: 1.2rem;
-            color: #ccc; 
-        }
+
         .slider {
+            position: relative;
+            width: 100%; /* Full width */
             overflow: hidden; /* Hide overflow */
-            padding: 20px;
-            background-color: transparent; 
         }
+
         .slider-track {
-            display: flex;
-            animation: slide 20s linear infinite; /* Animation for left scrolling */
+            display: flex; /* Horizontal layout */
+            animation: slide 20s linear infinite; /* Infinite sliding animation */
         }
-        .slider-track:hover {
-            animation-play-state: paused; /* Pause animation on hover */
-        }
+
         .slider img {
-            width: 220px;
-            height: 220px;
-            border-radius: 10px;
-            margin: 0 10px;
-            transition: transform 0.3s;
-            background-color: transparent; 
-            cursor: pointer;
+            width: 300px; /* Image width */
+            height: 200px; /* Image height */
+            margin-right: 10px; /* Spacing between images */
+            border-radius: 10px; /* Rounded corners */
         }
-        .slider img:hover {
-            transform: scale(1.2);
+
+        /* Animation keyframes */
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(0); /* Stay at the start */
+            }
+            25% {
+                transform: translateX(-100%); /* Move to the first image */
+            }
+            45% {
+                transform: translateX(-100%); /* Hold on the first image */
+            }
+            50% {
+                transform: translateX(-200%); /* Move to the second image */
+            }
+            70% {
+                transform: translateX(-200%); /* Hold on the second image */
+            }
+            75% {
+                transform: translateX(-300%); /* Move to the third image */
+            }
+            95% {
+                transform: translateX(-300%); /* Hold on the third image */
+            }
+            100% {
+                transform: translateX(0); /* Reset to the beginning */
+            }
         }
-        
+
         .lightbox {
             position: fixed;
             top: 0;
@@ -122,31 +95,9 @@
             text-decoration: none;
         }
         
-        @keyframes slide {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>My E-Portfolio In Media Information Literacy</h1>
-    </div>
-    <div class="profile-section">
-        <img src="images/lancearmenta.jpg" alt="Mark Lance Armenta ID">
-        <h2>Mark Lance L. Armenta</h2>
-        <p>12-Tolerance</p>
-    </div>
-
-    <div id="lightbox" class="lightbox">
-        <a href="#" class="close-lightbox">&times;</a>
-        <img id="lightbox-img" src="" alt="Expanded View">
-    </div>
-
     <div class="slider">
         <div class="slider-track">
             <img src="images/project1.jpg" alt="Project 1" onclick="openLightbox(this.src)">
@@ -154,11 +105,17 @@
             <img src="images/project3.jpg" alt="Project 3" onclick="openLightbox(this.src)">
             <img src="images/project4.jpg" alt="Project 4" onclick="openLightbox(this.src)">
             <img src="images/project5.jpg" alt="Project 5" onclick="openLightbox(this.src)">
-            <img src="images/project6.jpg" alt="Project 6" onclick="openLightbox(this.src)">
-            <img src="images/project7.jpg" alt="Project 7" onclick="openLightbox(this.src)">
-            <img src="images/project8.jpg" alt="Project 8" onclick="openLightbox(this.src)">
-            <img src="images/project9.jpg" alt="Project 9" onclick="openLightbox(this.src)">
+            <img src="images/project1.jpg" alt="Project 1"> <!-- Duplicate for seamless effect -->
+            <img src="images/project2.jpg" alt="Project 2"> <!-- Duplicate for seamless effect -->
+            <img src="images/project3.jpg" alt="Project 3"> <!-- Duplicate for seamless effect -->
+            <img src="images/project4.jpg" alt="Project 4"> <!-- Duplicate for seamless effect -->
+            <img src="images/project5.jpg" alt="Project 5"> <!-- Duplicate for seamless effect -->
         </div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <a href="#" class="close-lightbox" onclick="closeLightbox()">&times;</a>
+        <img id="lightbox-img" src="" alt="Expanded View">
     </div>
 
     <script>
@@ -167,64 +124,9 @@
             window.location.hash = 'lightbox'; 
         }
 
-        // Touch scrolling support for mobile devices
-        const sliderTrack = document.querySelector('.slider-track');
-        let startX = 0;
-        let scrollLeft = 0;
-
-        sliderTrack.addEventListener('mousedown', (e) => {
-            startX = e.pageX - sliderTrack.offsetLeft;
-            scrollLeft = sliderTrack.scrollLeft;
-            sliderTrack.style.cursor = 'grabbing'; // Change cursor to grabbing
-        });
-
-        sliderTrack.addEventListener('mouseleave', () => {
-            sliderTrack.style.cursor = 'grab'; // Reset cursor
-        });
-
-        sliderTrack.addEventListener('mouseup', () => {
-            sliderTrack.style.cursor = 'grab'; // Reset cursor
-        });
-
-        sliderTrack.addEventListener('mousemove', (e) => {
-            if (e.buttons === 1) {
-                const x = e.pageX - sliderTrack.offsetLeft;
-                const walk = (x - startX) * 2; // Scroll-fast
-                sliderTrack.scrollLeft = scrollLeft - walk;
-            }
-        });
-
-        // Touch events for mobile
-        let isDown = false;
-
-        sliderTrack.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - sliderTrack.offsetLeft;
-            scrollLeft = sliderTrack.scrollLeft;
-        });
-
-        sliderTrack.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        sliderTrack.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const x = e.touches[0].pageX - sliderTrack.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll-fast
-            sliderTrack.scrollLeft = scrollLeft - walk;
-        });
+        function closeLightbox() {
+            window.location.hash = ''; // Close lightbox by removing hash
+        }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
